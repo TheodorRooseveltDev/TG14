@@ -1,0 +1,73 @@
+name: casino_dealers_flow
+description: "Premium offline utility app for professional casino dealers."
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.9.2
+
+dependencies:
+  flutter:
+    sdk: flutter
+  
+  # Core UI
+  cupertino_icons: ^1.0.8
+  google_fonts: ^6.1.0
+  
+  # State Management
+  provider: ^6.1.1
+  
+  # Database - 100% OFFLINE
+  sqflite: ^2.3.0
+  path: ^1.8.3
+  path_provider: ^2.1.1
+  
+  # Animations
+  lottie: ^3.0.0
+  animated_text_kit: ^4.2.2
+  confetti: ^0.7.0
+  
+  # UI Components
+  flutter_slidable: ^3.0.1
+  expandable: ^5.0.1
+  reorderables: ^0.6.0
+  
+  # Utilities
+  shared_preferences: ^2.2.2
+  intl: ^0.18.1
+  uuid: ^4.2.1
+  file_picker: ^6.1.1
+  share_plus: ^7.2.1
+  csv: ^5.1.1
+  
+  # Features
+  table_calendar: ^3.0.9
+  fl_chart: ^0.65.0
+  audioplayers: ^5.2.1
+  vibration: ^1.8.4
+  flutter_inappwebview: ^6.0.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0
+  flutter_launcher_icons: ^0.13.1
+
+flutter:
+  uses-material-design: true
+  
+  # Assets
+  assets:
+    - assets/
+    - assets/icon.png
+    - assets/splash-screen.png
+    - assets/main-bg.png
+    - assets/dealer-avatar.png
+
+flutter_launcher_icons:
+  android: false
+  ios: true
+  image_path: "assets/icon.png"
+  remove_alpha_ios: true
+
