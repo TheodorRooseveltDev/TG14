@@ -2,7 +2,7 @@ name: casino_dealers_flow
 description: "Premium offline utility app for professional casino dealers."
 publish_to: 'none'
 
-version: 1.0.0+2
+version: 1.0.0+3
 
 environment:
   sdk: ^3.9.2
@@ -47,6 +47,7 @@ dependencies:
   audioplayers: ^5.2.1
   vibration: ^2.0.0
   flutter_inappwebview: ^6.0.0
+  image_picker: ^1.0.5
 
 dev_dependencies:
   flutter_test:

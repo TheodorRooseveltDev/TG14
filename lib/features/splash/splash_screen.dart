@@ -148,7 +148,7 @@ class _SplashScreenState extends State<SplashScreen>
                 children: [
                   TextButton(
                     onPressed: () => _openWebView(
-                      'https://casinodealersflow.com/privacy',
+                      'https://casinodealersflow.com/privacy/',
                       'Privacy Policy',
                     ),
                     child: Text(
@@ -167,7 +167,7 @@ class _SplashScreenState extends State<SplashScreen>
                   ),
                   TextButton(
                     onPressed: () => _openWebView(
-                      'https://casinodealersflow.com/terms',
+                      'https://casinodealersflow.com/terms/',
                       'Terms & Conditions',
                     ),
                     child: Text(

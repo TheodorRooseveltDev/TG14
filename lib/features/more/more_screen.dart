@@ -18,6 +18,7 @@ import '../achievements/achievements_screen.dart';
 import '../tools/tip_calculator_screen.dart';
 import '../tools/break_timer_screen.dart';
 import '../onboarding/onboarding_screen.dart';
+import 'support_screen.dart';
 
 /// More Screen - Settings, resources, and additional features
 class MoreScreen extends StatefulWidget {
@@ -456,7 +457,7 @@ class _MoreScreenState extends State<MoreScreen>
           title: 'Privacy Policy',
           subtitle: 'Your data stays on your device',
           onTap: () {
-            _openWebView('https://casinodealersflow.com/privacy', 'Privacy Policy');
+            _openWebView('https://casinodealersflow.com/privacy/', 'Privacy Policy');
           },
         ),
         const SizedBox(height: 12),
@@ -465,7 +466,21 @@ class _MoreScreenState extends State<MoreScreen>
           title: 'Terms & Conditions',
           subtitle: 'Terms of service',
           onTap: () {
-            _openWebView('https://casinodealersflow.com/terms', 'Terms & Conditions');
+            _openWebView('https://casinodealersflow.com/terms/', 'Terms & Conditions');
+          },
+        ),
+        const SizedBox(height: 12),
+        _buildMenuItem(
+          icon: Icons.support_agent,
+          title: 'Contact Support',
+          subtitle: 'Get help with issues',
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const SupportScreen(),
+              ),
+            );
           },
         ),
       ],
