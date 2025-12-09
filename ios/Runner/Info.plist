@@ -28,8 +28,6 @@
 	<true/>
 	<key>NSCameraUsageDescription</key>
 	<string>We need access to your camera to attach photos to support requests.</string>
-	<key>NSMicrophoneUsageDescription</key>
-	<string>We need access to your microphone for support requests.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>We need access to your photo library to attach images to support requests.</string>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
