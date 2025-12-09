@@ -142,7 +142,7 @@ class _ShiftFormScreenState extends State<ShiftFormScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: FeltBackground(
-        backgroundImage: 'assets/main-bg.png',
+        backgroundImage: 'assets/main-bg-min.jpg',
         darkOverlay: true,
         child: SafeArea(
           child: Form(

@@ -97,7 +97,7 @@ class _AchievementsScreenState extends State<AchievementsScreen>
     
     return Scaffold(
       body: FeltBackground(
-        backgroundImage: 'assets/main-bg.png',
+        backgroundImage: 'assets/main-bg-min.jpg',
         darkOverlay: true,
         child: SafeArea(
           child: Column(

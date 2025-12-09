@@ -118,7 +118,7 @@ class _StatsScreenState extends State<StatsScreen>
     
     return Scaffold(
       body: FeltBackground(
-        backgroundImage: 'assets/main-bg.png',
+        backgroundImage: 'assets/main-bg-min.jpg',
         darkOverlay: true,
         child: SafeArea(
           child: RefreshIndicator(

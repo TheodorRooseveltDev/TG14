@@ -98,7 +98,7 @@ class _ShiftLogScreenState extends State<ShiftLogScreen>
     
     return Scaffold(
       body: FeltBackground(
-        backgroundImage: 'assets/main-bg.png',
+        backgroundImage: 'assets/main-bg-min.jpg',
         darkOverlay: true,
         child: SafeArea(
           child: Column(
@@ -644,6 +644,7 @@ class _ShiftLogScreenState extends State<ShiftLogScreen>
 
   Widget _buildFAB() {
     return FloatingActionButton.extended(
+      heroTag: 'shift_log_fab',
       onPressed: () async {
         final result = await Navigator.push<bool>(
           context,

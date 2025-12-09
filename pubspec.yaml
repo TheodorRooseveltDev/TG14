@@ -2,7 +2,7 @@ name: casino_dealers_flow
 description: "Premium offline utility app for professional casino dealers."
 publish_to: 'none'
 
-version: 1.0.0+3
+version: 1.0.0+4
 
 environment:
   sdk: ^3.9.2
@@ -13,25 +13,11 @@ dependencies:
   
   # Core UI
   cupertino_icons: ^1.0.8
-  google_fonts: ^6.1.0
-  
-  # State Management
-  provider: ^6.1.1
   
   # Database - 100% OFFLINE
   sqflite: ^2.3.0
   path: ^1.8.3
   path_provider: ^2.1.1
-  
-  # Animations
-  lottie: ^3.0.0
-  animated_text_kit: ^4.2.2
-  confetti: ^0.7.0
-  
-  # UI Components
-  flutter_slidable: ^3.0.1
-  expandable: ^5.0.1
-  reorderables: ^0.6.0
   
   # Utilities
   shared_preferences: ^2.2.2
@@ -43,9 +29,6 @@ dependencies:
   
   # Features
   table_calendar: ^3.0.9
-  fl_chart: ^0.65.0
-  audioplayers: ^5.2.1
-  vibration: ^2.0.0
   flutter_inappwebview: ^6.0.0
   image_picker: ^1.0.5
 
@@ -62,8 +45,7 @@ flutter:
   assets:
     - assets/
     - assets/icon.png
-    - assets/splash-screen.png
-    - assets/main-bg.png
+    - assets/main-bg-min.jpg
     - assets/dealer-avatar.png
 
 flutter_launcher_icons:

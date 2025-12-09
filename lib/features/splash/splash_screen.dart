@@ -122,7 +122,7 @@ class _SplashScreenState extends State<SplashScreen>
   Widget build(BuildContext context) {
     return Scaffold(
       body: FeltBackground(
-        backgroundImage: 'assets/main-bg.png',
+        backgroundImage: 'assets/main-bg-min.jpg',
         darkOverlay: true,
         child: Stack(
           children: [

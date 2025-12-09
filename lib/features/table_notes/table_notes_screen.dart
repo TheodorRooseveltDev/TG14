@@ -156,7 +156,7 @@ class _TableNotesScreenState extends State<TableNotesScreen>
     
     return Scaffold(
       body: FeltBackground(
-        backgroundImage: 'assets/main-bg.png',
+        backgroundImage: 'assets/main-bg-min.jpg',
         darkOverlay: true,
         child: SafeArea(
           child: Column(
@@ -740,6 +740,7 @@ class _TableNotesScreenState extends State<TableNotesScreen>
 
   Widget _buildFAB() {
     return FloatingActionButton.extended(
+      heroTag: 'table_notes_fab',
       onPressed: () async {
         final result = await Navigator.push<bool>(
           context,

@@ -168,7 +168,7 @@ class _HomeScreenState extends State<HomeScreen>
         ],
       ),
       body: FeltBackground(
-        backgroundImage: 'assets/main-bg.png',
+        backgroundImage: 'assets/main-bg-min.jpg',
         darkOverlay: true,
         child: SafeArea(
           bottom: false,
@@ -216,6 +216,7 @@ class _HomeScreenState extends State<HomeScreen>
         ),
       ),
       floatingActionButton: FloatingActionButton.extended(
+        heroTag: 'home_new_shift_fab',
         onPressed: () async {
           final result = await Navigator.push<bool>(
             context,
