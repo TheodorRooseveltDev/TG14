@@ -4,6 +4,7 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../../../config/theme/app_colors.dart';
 import '../../widgets/backgrounds/animated_casino_background.dart';
 import '../onboarding/onboarding_screen.dart';
@@ -17,7 +18,6 @@ class SettingsScreen extends StatefulWidget {
 
 class _SettingsScreenState extends State<SettingsScreen> {
   bool _soundEnabled = false;
-  bool _musicEnabled = false;
   bool _vibrationEnabled = false;
 
   @override
@@ -26,6 +26,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
       color: Colors.transparent,
       child: AnimatedCasinoBackground(
         child: SingleChildScrollView(
+            physics: const ClampingScrollPhysics(),
             child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -64,8 +65,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
               _buildSettingsCard([
                 _buildToggle('Sound Effects', Icons.volume_up_rounded, _soundEnabled, (v) => setState(() => _soundEnabled = v)),
                 _buildDivider(),
-                _buildToggle('Music', Icons.music_note_rounded, _musicEnabled, (v) => setState(() => _musicEnabled = v)),
-                _buildDivider(),
                 _buildToggle('Vibration', Icons.vibration, _vibrationEnabled, (v) => setState(() => _vibrationEnabled = v)),
               ]),
               
@@ -77,9 +76,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
               _buildSettingsCard([
                 _buildLink('Contact Us', Icons.mail_outline_rounded, onTap: () => _showContactUsModal(context)),
                 _buildDivider(),
-                _buildLink('Terms of Service', Icons.description_outlined),
+                _buildLink('Terms of Service', Icons.description_outlined, onTap: () => _launchURL('https://casinodealersflow.com/terms/')),
                 _buildDivider(),
-                _buildLink('Privacy Policy', Icons.shield_outlined),
+                _buildLink('Privacy Policy', Icons.shield_outlined, onTap: () => _launchURL('https://casinodealersflow.com/privacy/')),
               ]),
               
               const SizedBox(height: 28),
@@ -93,7 +92,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   padding: const EdgeInsets.all(16),
                   decoration: BoxDecoration(
                     color: AppColors.cardBackground,
-                    borderRadius: BorderRadius.circular(16),
+                    borderRadius: BorderRadius.circular(8),
                     border: Border.all(color: AppColors.gold.withOpacity(0.1)),
                   ),
                   child: Row(
@@ -134,7 +133,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     height: 52,
                     decoration: BoxDecoration(
                       color: AppColors.redVelvet.withOpacity(0.1),
-                      borderRadius: BorderRadius.circular(14),
+                      borderRadius: BorderRadius.circular(8),
                       border: Border.all(color: AppColors.redVelvet.withOpacity(0.5)),
                     ),
                     child: Row(
@@ -202,7 +201,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
       child: Container(
         decoration: BoxDecoration(
           color: AppColors.cardBackground,
-          borderRadius: BorderRadius.circular(16),
+          borderRadius: BorderRadius.circular(8),
           border: Border.all(color: AppColors.gold.withOpacity(0.1)),
         ),
         child: Column(children: children),
@@ -281,13 +280,20 @@ class _SettingsScreenState extends State<SettingsScreen> {
     );
   }
 
+  Future<void> _launchURL(String url) async {
+    final uri = Uri.parse(url);
+    if (await canLaunchUrl(uri)) {
+      await launchUrl(uri, mode: LaunchMode.externalApplication);
+    }
+  }
+
   void _showDeleteConfirmation(BuildContext context) {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
         backgroundColor: AppColors.cardBackground,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20),
+          borderRadius: BorderRadius.circular(8),
           side: BorderSide(color: AppColors.gold.withOpacity(0.2)),
         ),
         title: Row(
@@ -463,7 +469,7 @@ class _ContactUsModalState extends State<_ContactUsModal> {
         builder: (context) => AlertDialog(
           backgroundColor: AppColors.cardBackground,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(20),
+            borderRadius: BorderRadius.circular(8),
             side: BorderSide(color: AppColors.gold.withOpacity(0.3)),
           ),
           content: Column(
@@ -510,7 +516,7 @@ class _ContactUsModalState extends State<_ContactUsModal> {
                     foregroundColor: AppColors.deepBlack,
                     padding: const EdgeInsets.symmetric(vertical: 14),
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
+                      borderRadius: BorderRadius.circular(8),
                     ),
                   ),
                   child: Text(
@@ -544,7 +550,7 @@ class _ContactUsModalState extends State<_ContactUsModal> {
             height: 4,
             decoration: BoxDecoration(
               color: AppColors.slateGray.withOpacity(0.3),
-              borderRadius: BorderRadius.circular(2),
+              borderRadius: BorderRadius.circular(8),
             ),
           ),
           // Header
@@ -572,6 +578,7 @@ class _ContactUsModalState extends State<_ContactUsModal> {
           // Form
           Expanded(
             child: SingleChildScrollView(
+              physics: const ClampingScrollPhysics(),
               padding: const EdgeInsets.all(20),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -595,15 +602,15 @@ class _ContactUsModalState extends State<_ContactUsModal> {
                       filled: true,
                       fillColor: AppColors.deepBlack.withOpacity(0.5),
                       border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12),
+                        borderRadius: BorderRadius.circular(8),
                         borderSide: BorderSide(color: AppColors.gold.withOpacity(0.2)),
                       ),
                       enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12),
+                        borderRadius: BorderRadius.circular(8),
                         borderSide: BorderSide(color: AppColors.gold.withOpacity(0.2)),
                       ),
                       focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12),
+                        borderRadius: BorderRadius.circular(8),
                         borderSide: BorderSide(color: AppColors.gold),
                       ),
                     ),
@@ -629,15 +636,15 @@ class _ContactUsModalState extends State<_ContactUsModal> {
                       filled: true,
                       fillColor: AppColors.deepBlack.withOpacity(0.5),
                       border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12),
+                        borderRadius: BorderRadius.circular(8),
                         borderSide: BorderSide(color: AppColors.gold.withOpacity(0.2)),
                       ),
                       enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12),
+                        borderRadius: BorderRadius.circular(8),
                         borderSide: BorderSide(color: AppColors.gold.withOpacity(0.2)),
                       ),
                       focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12),
+                        borderRadius: BorderRadius.circular(8),
                         borderSide: BorderSide(color: AppColors.gold),
                       ),
                     ),
@@ -657,7 +664,7 @@ class _ContactUsModalState extends State<_ContactUsModal> {
                     Stack(
                       children: [
                         ClipRRect(
-                          borderRadius: BorderRadius.circular(12),
+                          borderRadius: BorderRadius.circular(8),
                           child: Image.file(
                             _attachedImage!,
                             height: 150,
@@ -693,7 +700,7 @@ class _ContactUsModalState extends State<_ContactUsModal> {
                         height: 100,
                         decoration: BoxDecoration(
                           color: AppColors.deepBlack.withOpacity(0.5),
-                          borderRadius: BorderRadius.circular(12),
+                          borderRadius: BorderRadius.circular(8),
                           border: Border.all(
                             color: AppColors.gold.withOpacity(0.2),
                             style: BorderStyle.solid,
@@ -733,7 +740,7 @@ class _ContactUsModalState extends State<_ContactUsModal> {
                         foregroundColor: AppColors.deepBlack,
                         disabledBackgroundColor: AppColors.gold.withOpacity(0.5),
                         shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(14),
+                          borderRadius: BorderRadius.circular(8),
                         ),
                       ),
                       child: _isSubmitting

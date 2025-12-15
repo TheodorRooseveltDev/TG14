@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
@@ -24,10 +25,17 @@ class _HomeScreenState extends State<HomeScreen> {
     setState(() => _currentIndex = 1);
   }
 
+  void _navigateToWheel() {
+    setState(() => _currentIndex = 2);
+  }
+
   @override
   Widget build(BuildContext context) {
     final screens = [
-      _HomeContent(onNavigateToGames: _navigateToGames),
+      _HomeContent(
+        onNavigateToGames: _navigateToGames,
+        onNavigateToWheel: _navigateToWheel,
+      ),
       const GamesScreen(),
       const WheelScreen(),
       const SettingsScreen(),
@@ -39,6 +47,48 @@ class _HomeScreenState extends State<HomeScreen> {
         children: [
           // Content
           IndexedStack(index: _currentIndex, children: screens),
+          // Top gradient overlay
+          Positioned(
+            top: 0,
+            left: 0,
+            right: 0,
+            height: 120,
+            child: IgnorePointer(
+              child: Container(
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                    colors: [
+                      Colors.black.withOpacity(0.6),
+                      Colors.transparent,
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ),
+          // Bottom gradient overlay
+          Positioned(
+            bottom: 0,
+            left: 0,
+            right: 0,
+            height: 200,
+            child: IgnorePointer(
+              child: Container(
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    begin: Alignment.bottomCenter,
+                    end: Alignment.topCenter,
+                    colors: [
+                      Colors.black.withOpacity(0.8),
+                      Colors.transparent,
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ),
           // Floating navbar
           Positioned(
             left: 0,
@@ -70,22 +120,23 @@ class _PremiumNavBar extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 24),
           child: ClipRRect(
-            borderRadius: BorderRadius.circular(34),
+            borderRadius: BorderRadius.circular(24),
             child: BackdropFilter(
               filter: ImageFilter.blur(sigmaX: 20, sigmaY: 20),
               child: Container(
                 height: 68,
+                padding: const EdgeInsets.only(top: 16, bottom: 16),
                 decoration: BoxDecoration(
                   color: AppColors.cardBackground.withOpacity(0.8),
-                  borderRadius: BorderRadius.circular(34),
+                  borderRadius: BorderRadius.circular(24),
                   border: Border.all(
                     color: AppColors.gold.withOpacity(0.25),
                     width: 1,
                   ),
                 ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
                     _NavItem(
                       icon: Icons.home_rounded,
                       isActive: currentIndex == 0,
@@ -136,18 +187,28 @@ class _NavItem extends StatelessWidget {
       behavior: HitTestBehavior.opaque,
       child: SizedBox(
         width: 54,
-        height: 72,
+        height: 54,
         child: Center(
-          child: AnimatedContainer(
-            duration: const Duration(milliseconds: 250),
-            curve: Curves.easeOutCubic,
+          child: Container(
             width: 44,
             height: 44,
             decoration: BoxDecoration(
-              color: isActive
-                  ? AppColors.gold.withOpacity(0.12)
-                  : Colors.transparent,
-              borderRadius: BorderRadius.circular(14),
+              borderRadius: BorderRadius.circular(8),
+              boxShadow: isActive
+                  ? [
+                      BoxShadow(
+                        color: AppColors.gold.withOpacity(0.4),
+                        blurRadius: 20,
+                        spreadRadius: 2,
+                      ),
+                    ]
+                  : [
+                      BoxShadow(
+                        color: AppColors.gold.withOpacity(0),
+                        blurRadius: 20,
+                        spreadRadius: 2,
+                      ),
+                    ],
             ),
             child: Stack(
               alignment: Alignment.center,
@@ -187,10 +248,53 @@ class _NavItem extends StatelessWidget {
   }
 }
 
-class _HomeContent extends StatelessWidget {
+class _HomeContent extends StatefulWidget {
   final VoidCallback? onNavigateToGames;
+  final VoidCallback? onNavigateToWheel;
 
-  const _HomeContent({this.onNavigateToGames});
+  const _HomeContent({
+    this.onNavigateToGames,
+    this.onNavigateToWheel,
+  });
+
+  @override
+  State<_HomeContent> createState() => _HomeContentState();
+}
+
+class _HomeContentState extends State<_HomeContent> {
+  final PageController _pageController = PageController(viewportFraction: 0.7, initialPage: 10000);
+  Timer? _autoScrollTimer;
+  int _currentPage = 10000;
+
+  @override
+  void initState() {
+    super.initState();
+    _startAutoScroll();
+  }
+
+  @override
+  void dispose() {
+    _autoScrollTimer?.cancel();
+    _pageController.dispose();
+    super.dispose();
+  }
+
+  void _startAutoScroll() {
+    _autoScrollTimer = Timer.periodic(const Duration(seconds: 3), (timer) {
+      if (_pageController.hasClients) {
+        final provider = context.read<GamesProvider>();
+        final featuredCount = provider.featuredGames.length;
+        if (featuredCount > 0) {
+          _currentPage++;
+          _pageController.animateToPage(
+            _currentPage,
+            duration: const Duration(milliseconds: 600),
+            curve: Curves.easeInOutCubic,
+          );
+        }
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -222,6 +326,7 @@ class _HomeContent extends StatelessWidget {
               ),
             ),
             CustomScrollView(
+              physics: const ClampingScrollPhysics(),
               slivers: [
                 // Top Welcome Banner - Mysterious & Inviting
                 SliverToBoxAdapter(
@@ -336,7 +441,7 @@ class _HomeContent extends StatelessWidget {
                   child: Container(
                     margin: const EdgeInsets.fromLTRB(16, 16, 16, 0),
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(28),
+                      borderRadius: BorderRadius.circular(8),
                       gradient: RadialGradient(
                         center: Alignment.topCenter,
                         radius: 1.8,
@@ -367,9 +472,25 @@ class _HomeContent extends StatelessWidget {
                       ],
                     ),
                     child: ClipRRect(
-                      borderRadius: BorderRadius.circular(27),
+                      borderRadius: BorderRadius.circular(8),
                       child: Stack(
                         children: [
+                          // Background image
+                          Positioned.fill(
+                            child: Image.asset(
+                              'assets/icon.png',
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                          // Strong blur overlay
+                          Positioned.fill(
+                            child: BackdropFilter(
+                              filter: ImageFilter.blur(sigmaX: 30, sigmaY: 30),
+                              child: Container(
+                                color: AppColors.deepBlack.withOpacity(0.5),
+                              ),
+                            ),
+                          ),
                           // Shimmer overlay effect
                           Positioned.fill(
                             child: Container(
@@ -523,7 +644,7 @@ class _HomeContent extends StatelessWidget {
                                     .fadeIn(delay: 200.ms)
                                     .scaleX(begin: 0.5),
                                 const SizedBox(height: 20),
-                                // Main title - SOCIAL CASINO
+                                // Main title - LUCKY ROYALE SLOTS
                                 ShaderMask(
                                       shaderCallback: (bounds) =>
                                           LinearGradient(
@@ -536,7 +657,7 @@ class _HomeContent extends StatelessWidget {
                                             ],
                                           ).createShader(bounds),
                                       child: const Text(
-                                        'SOCIAL CASINO',
+                                        'LUCKY ROYALE SLOTS',
                                         textAlign: TextAlign.center,
                                         style: TextStyle(
                                           fontSize: 32,
@@ -566,7 +687,7 @@ class _HomeContent extends StatelessWidget {
                                 const SizedBox(height: 28),
                                 // Play Now button - bigger and better
                                 GestureDetector(
-                                      onTap: onNavigateToGames,
+                                      onTap: widget.onNavigateToGames,
                                       child: Container(
                                         padding: const EdgeInsets.symmetric(
                                           horizontal: 48,
@@ -582,9 +703,7 @@ class _HomeContent extends StatelessWidget {
                                               AppColors.goldDark,
                                             ],
                                           ),
-                                          borderRadius: BorderRadius.circular(
-                                            35,
-                                          ),
+                                          borderRadius: BorderRadius.circular(8),
                                           boxShadow: [
                                             BoxShadow(
                                               color: AppColors.gold.withOpacity(
@@ -718,14 +837,22 @@ class _HomeContent extends StatelessWidget {
                         );
                       }
                       return SizedBox(
-                        height: 240,
-                        child: ListView.builder(
-                          scrollDirection: Axis.horizontal,
-                          padding: const EdgeInsets.symmetric(horizontal: 24),
-                          itemCount: featuredGames.length,
+                        height: 260,
+                        child: PageView.builder(
+                          controller: _pageController,
+                          physics: const BouncingScrollPhysics(),
+                          onPageChanged: (index) {
+                            setState(() {
+                              _currentPage = index;
+                            });
+                          },
                           itemBuilder: (context, index) {
-                            final game = featuredGames[index];
-                            return FeaturedGameCard(game: game, index: index);
+                            final actualIndex = index % featuredGames.length;
+                            final game = featuredGames[actualIndex];
+                            return Padding(
+                              padding: const EdgeInsets.symmetric(horizontal: 8),
+                              child: FeaturedGameCard(game: game, index: actualIndex),
+                            );
                           },
                         ),
                       );
@@ -737,9 +864,11 @@ class _HomeContent extends StatelessWidget {
                 SliverToBoxAdapter(
                   child: Padding(
                     padding: const EdgeInsets.fromLTRB(24, 32, 24, 16),
-                    child: Container(
-                      padding: const EdgeInsets.all(20),
-                      decoration: BoxDecoration(
+                    child: GestureDetector(
+                      onTap: widget.onNavigateToWheel,
+                      child: Container(
+                        padding: const EdgeInsets.all(20),
+                        decoration: BoxDecoration(
                         gradient: LinearGradient(
                           begin: Alignment.topLeft,
                           end: Alignment.bottomRight,
@@ -748,7 +877,7 @@ class _HomeContent extends StatelessWidget {
                             AppColors.gold.withOpacity(0.05),
                           ],
                         ),
-                        borderRadius: BorderRadius.circular(20),
+                        borderRadius: BorderRadius.circular(8),
                         border: Border.all(
                           color: AppColors.gold.withOpacity(0.2),
                         ),
@@ -760,7 +889,7 @@ class _HomeContent extends StatelessWidget {
                             height: 56,
                             decoration: BoxDecoration(
                               gradient: AppColors.goldGradient,
-                              borderRadius: BorderRadius.circular(16),
+                              borderRadius: BorderRadius.circular(8),
                             ),
                             child: const Icon(
                               Icons.motion_photos_on_rounded,
@@ -800,6 +929,7 @@ class _HomeContent extends StatelessWidget {
                         ],
                       ),
                     ).animate().fadeIn(delay: 200.ms).slideX(begin: 0.1),
+                    ),
                   ),
                 ),
 

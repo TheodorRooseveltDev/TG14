@@ -63,7 +63,7 @@ class AppTheme {
           elevation: 0,
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12),
+            borderRadius: BorderRadius.circular(8),
           ),
           textStyle: AppTypography.labelLarge.copyWith(
             fontWeight: FontWeight.w700,
@@ -83,15 +83,15 @@ class AppTheme {
         filled: true,
         fillColor: AppColors.cardBackground,
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12),
+          borderRadius: BorderRadius.circular(8),
           borderSide: BorderSide(color: AppColors.gold.withOpacity(0.3)),
         ),
         enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12),
+          borderRadius: BorderRadius.circular(8),
           borderSide: BorderSide(color: AppColors.gold.withOpacity(0.2)),
         ),
         focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12),
+          borderRadius: BorderRadius.circular(8),
           borderSide: const BorderSide(color: AppColors.gold),
         ),
         hintStyle: AppTypography.bodyMedium.copyWith(
@@ -120,7 +120,7 @@ class AppTheme {
           color: AppColors.textLight,
         ),
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(12),
+          borderRadius: BorderRadius.circular(8),
         ),
         behavior: SnackBarBehavior.floating,
       ),
@@ -137,7 +137,7 @@ class AppTheme {
       dialogTheme: DialogThemeData(
         backgroundColor: AppColors.cardBackground,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(24),
+          borderRadius: BorderRadius.circular(8),
         ),
         titleTextStyle: AppTypography.headlineMedium.copyWith(
           color: AppColors.textLight,
@@ -152,7 +152,7 @@ class AppTheme {
         color: AppColors.cardBackground,
         elevation: 0,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(16),
+          borderRadius: BorderRadius.circular(8),
         ),
       ),
       

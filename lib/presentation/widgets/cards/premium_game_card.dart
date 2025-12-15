@@ -58,7 +58,7 @@ class _PremiumGameCardState extends State<PremiumGameCard> {
         transform: Matrix4.identity()..scale(_isHovered ? 0.97 : 1.0),
         decoration: BoxDecoration(
           color: AppColors.cardBackground,
-          borderRadius: BorderRadius.circular(24),
+          borderRadius: BorderRadius.circular(8),
           border: Border.all(
             color: _isHovered 
                 ? AppColors.gold.withOpacity(0.6) 
@@ -76,7 +76,7 @@ class _PremiumGameCardState extends State<PremiumGameCard> {
           ],
         ),
         child: ClipRRect(
-          borderRadius: BorderRadius.circular(23),
+          borderRadius: BorderRadius.circular(8),
           child: Stack(
             children: [
               // Background with game image
@@ -275,7 +275,7 @@ class _PremiumGameCardState extends State<PremiumGameCard> {
               ? [AppColors.gold, AppColors.goldDark]
               : [AppColors.redVelvet, AppColors.redVelvet.withOpacity(0.8)],
         ),
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(8),
         boxShadow: [
           BoxShadow(
             color: (isNew ? AppColors.gold : AppColors.redVelvet).withOpacity(0.4),
@@ -313,7 +313,7 @@ class _PremiumGameCardState extends State<PremiumGameCard> {
       height: 40,
       decoration: BoxDecoration(
         gradient: AppColors.goldGradient,
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(8),
         boxShadow: [
           BoxShadow(
             color: AppColors.gold.withOpacity(0.3),
@@ -326,7 +326,7 @@ class _PremiumGameCardState extends State<PremiumGameCard> {
         color: Colors.transparent,
         child: InkWell(
           onTap: _openGameDetail,
-          borderRadius: BorderRadius.circular(12),
+          borderRadius: BorderRadius.circular(8),
           child: const Center(
             child: Row(
               mainAxisSize: MainAxisSize.min,
@@ -403,7 +403,7 @@ class _FeaturedGameCardState extends State<FeaturedGameCard> {
         margin: const EdgeInsets.only(right: 16),
         transform: Matrix4.identity()..scale(_isPressed ? 0.96 : 1.0),
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(20),
+          borderRadius: BorderRadius.circular(8),
           border: Border.all(
             color: _isPressed 
                 ? AppColors.gold.withOpacity(0.5) 
@@ -421,7 +421,7 @@ class _FeaturedGameCardState extends State<FeaturedGameCard> {
           ],
         ),
         child: ClipRRect(
-          borderRadius: BorderRadius.circular(18),
+          borderRadius: BorderRadius.circular(8),
           child: Stack(
             children: [
               // Full background image
@@ -483,7 +483,7 @@ class _FeaturedGameCardState extends State<FeaturedGameCard> {
                       height: 32,
                       decoration: BoxDecoration(
                         gradient: AppColors.goldGradient,
-                        borderRadius: BorderRadius.circular(10),
+                        borderRadius: BorderRadius.circular(8),
                       ),
                       child: const Center(
                         child: Text(
@@ -514,7 +514,7 @@ class _FeaturedGameCardState extends State<FeaturedGameCard> {
                             ? [AppColors.gold, AppColors.goldDark]
                             : [AppColors.redVelvet, AppColors.redVelvet.withOpacity(0.8)],
                       ),
-                      borderRadius: BorderRadius.circular(12),
+                      borderRadius: BorderRadius.circular(8),
                     ),
                     child: Text(
                       widget.game.isNew ? 'NEW' : 'HOT',

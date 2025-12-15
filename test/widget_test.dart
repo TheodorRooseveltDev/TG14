@@ -1,4 +1,4 @@
-// Basic Flutter widget test for Social Casino app
+// Basic Flutter widget test for Lucky Royale Slots app
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:casino_dealers_flow_2/main.dart';

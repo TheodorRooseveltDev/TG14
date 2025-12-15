@@ -284,6 +284,7 @@ class _LeaderboardList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
+      physics: const ClampingScrollPhysics(),
       padding: const EdgeInsets.symmetric(horizontal: 20),
       itemCount: entries.length,
       itemBuilder: (context, index) {

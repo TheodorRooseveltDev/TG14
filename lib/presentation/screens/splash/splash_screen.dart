@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../../../config/theme/app_colors.dart';
 import '../../widgets/backgrounds/animated_casino_background.dart';
 import '../onboarding/onboarding_screen.dart';
@@ -78,9 +79,9 @@ class _SplashScreenState extends State<SplashScreen>
                 Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    // Social Casino text
+                    // Lucky Royale Slots text
                     Text(
-                      'SOCIAL CASINO',
+                      'LUCKY ROYALE SLOTS',
                       style: TextStyle(
                         fontSize: 28,
                         fontWeight: FontWeight.w800,
@@ -135,8 +136,11 @@ class _SplashScreenState extends State<SplashScreen>
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       GestureDetector(
-                        onTap: () {
-                          // TODO: Open Privacy Policy
+                        onTap: () async {
+                          final uri = Uri.parse('https://casinodealersflow.com/privacy/');
+                          if (await canLaunchUrl(uri)) {
+                            await launchUrl(uri, mode: LaunchMode.externalApplication);
+                          }
                         },
                         child: Text(
                           'Privacy Policy',
@@ -159,8 +163,11 @@ class _SplashScreenState extends State<SplashScreen>
                         ),
                       ),
                       GestureDetector(
-                        onTap: () {
-                          // TODO: Open Terms & Conditions
+                        onTap: () async {
+                          final uri = Uri.parse('https://casinodealersflow.com/terms/');
+                          if (await canLaunchUrl(uri)) {
+                            await launchUrl(uri, mode: LaunchMode.externalApplication);
+                          }
                         },
                         child: Text(
                           'Terms & Conditions',

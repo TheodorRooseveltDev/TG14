@@ -25,6 +25,7 @@ class GameDetailScreen extends StatelessWidget {
           ),
           // Content
           CustomScrollView(
+            physics: const ClampingScrollPhysics(),
             slivers: [
               // Banner with back button and game info
               SliverToBoxAdapter(
@@ -115,7 +116,7 @@ class GameDetailScreen extends StatelessWidget {
           child: GestureDetector(
             onTap: () => Navigator.pop(context),
             child: ClipRRect(
-              borderRadius: BorderRadius.circular(12),
+              borderRadius: BorderRadius.circular(8),
               child: BackdropFilter(
                 filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
                 child: Container(
@@ -123,7 +124,7 @@ class GameDetailScreen extends StatelessWidget {
                   height: 44,
                   decoration: BoxDecoration(
                     color: AppColors.deepBlack.withOpacity(0.5),
-                    borderRadius: BorderRadius.circular(12),
+                    borderRadius: BorderRadius.circular(8),
                     border: Border.all(
                       color: AppColors.gold.withOpacity(0.3),
                       width: 1,
@@ -147,7 +148,7 @@ class GameDetailScreen extends StatelessWidget {
             width: 100,
             height: 100,
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(20),
+              borderRadius: BorderRadius.circular(8),
               border: Border.all(
                 color: AppColors.gold.withOpacity(0.5),
                 width: 2,
@@ -332,7 +333,7 @@ class GameDetailScreen extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
       decoration: BoxDecoration(
         color: color.withOpacity(0.15),
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(8),
         border: Border.all(
           color: color.withOpacity(0.4),
           width: 1,
@@ -373,7 +374,7 @@ class GameDetailScreen extends StatelessWidget {
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
           ),
-          borderRadius: BorderRadius.circular(16),
+          borderRadius: BorderRadius.circular(8),
           border: Border.all(
             color: AppColors.goldLight.withOpacity(0.5),
             width: 1.5,
@@ -417,7 +418,7 @@ class GameDetailScreen extends StatelessWidget {
 
   Widget _buildSectionCard({required String title, required Widget child}) {
     return ClipRRect(
-      borderRadius: BorderRadius.circular(16),
+      borderRadius: BorderRadius.circular(8),
       child: BackdropFilter(
         filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
         child: Container(
@@ -425,7 +426,7 @@ class GameDetailScreen extends StatelessWidget {
           padding: const EdgeInsets.all(20),
           decoration: BoxDecoration(
             color: AppColors.cardBackground.withOpacity(0.7),
-            borderRadius: BorderRadius.circular(16),
+            borderRadius: BorderRadius.circular(8),
             border: Border.all(
               color: AppColors.gold.withOpacity(0.15),
               width: 1,
@@ -487,7 +488,7 @@ class GameDetailScreen extends StatelessWidget {
                   right: index < game.screenshots.length - 1 ? 12 : 0,
                 ),
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(12),
+                  borderRadius: BorderRadius.circular(8),
                   border: Border.all(
                     color: AppColors.gold.withOpacity(0.2),
                     width: 1,
@@ -560,7 +561,7 @@ class GameDetailScreen extends StatelessWidget {
           height: 36,
           decoration: BoxDecoration(
             color: AppColors.gold.withOpacity(0.1),
-            borderRadius: BorderRadius.circular(10),
+            borderRadius: BorderRadius.circular(8),
           ),
           child: Icon(
             icon,

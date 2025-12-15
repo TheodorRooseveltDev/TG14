@@ -127,9 +127,10 @@ class _WheelScreenState extends State<WheelScreen> with SingleTickerProviderStat
               height: 4,
               decoration: BoxDecoration(
                 color: AppColors.slateGray.withOpacity(0.3),
-                borderRadius: BorderRadius.circular(2),
+                borderRadius: BorderRadius.circular(8),
               ),
             ),
+            
             const SizedBox(height: 20),
             
             // Game info row: Icon + Title & Tagline
@@ -140,7 +141,7 @@ class _WheelScreenState extends State<WheelScreen> with SingleTickerProviderStat
                   width: 72,
                   height: 72,
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(18),
+                    borderRadius: BorderRadius.circular(8),
                     border: Border.all(
                       color: AppColors.gold.withOpacity(0.5),
                       width: 2,
@@ -154,7 +155,7 @@ class _WheelScreenState extends State<WheelScreen> with SingleTickerProviderStat
                     ],
                   ),
                   child: ClipRRect(
-                    borderRadius: BorderRadius.circular(16),
+                    borderRadius: BorderRadius.circular(8),
                     child: _selectedGame!.imageUrl != null
                         ? Image.network(
                             SupabaseService.getImageUrl(_selectedGame!.imageUrl),
@@ -219,7 +220,7 @@ class _WheelScreenState extends State<WheelScreen> with SingleTickerProviderStat
                       height: 54,
                       decoration: BoxDecoration(
                         border: Border.all(color: AppColors.gold.withOpacity(0.4)),
-                        borderRadius: BorderRadius.circular(16),
+                        borderRadius: BorderRadius.circular(8),
                       ),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -265,7 +266,7 @@ class _WheelScreenState extends State<WheelScreen> with SingleTickerProviderStat
                       height: 54,
                       decoration: BoxDecoration(
                         gradient: AppColors.goldGradient,
-                        borderRadius: BorderRadius.circular(16),
+                        borderRadius: BorderRadius.circular(8),
                         boxShadow: [
                           BoxShadow(
                             color: AppColors.gold.withOpacity(0.4),
@@ -378,7 +379,7 @@ class _WheelScreenState extends State<WheelScreen> with SingleTickerProviderStat
                 decoration: BoxDecoration(
                   gradient: _isSpinning ? null : AppColors.premiumGoldGradient,
                   color: _isSpinning ? AppColors.cardBackground : null,
-                  borderRadius: BorderRadius.circular(30),
+                  borderRadius: BorderRadius.circular(8),
                   border: Border.all(
                     color: _isSpinning 
                         ? AppColors.gold.withOpacity(0.3) 
@@ -625,7 +626,7 @@ class _WheelGameIcon extends StatelessWidget {
       width: 56,
       height: 56,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(14),
+        borderRadius: BorderRadius.circular(8),
         border: Border.all(
           color: AppColors.gold.withOpacity(0.5),
           width: 2,
@@ -638,7 +639,7 @@ class _WheelGameIcon extends StatelessWidget {
         ],
       ),
       child: ClipRRect(
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(8),
         child: game.imageUrl != null
             ? Image.network(
                 SupabaseService.getImageUrl(game.imageUrl),

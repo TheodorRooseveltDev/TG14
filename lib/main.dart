@@ -34,7 +34,7 @@ class SocialCasinoApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => GamesProvider()..loadGames()),
       ],
       child: MaterialApp(
-        title: 'Social Casino',
+        title: 'Lucky Royale Slots',
         debugShowCheckedModeBanner: false,
         theme: AppTheme.darkTheme,
         home: const SplashScreen(),

@@ -3,7 +3,7 @@ class AppStrings {
   AppStrings._();
 
   // App Info
-  static const String appName = 'Social Casino';
+  static const String appName = 'Lucky Royale Slots';
   static const String appTagline = 'Premium Casino Experience';
 
   // Splash Screen

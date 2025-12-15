@@ -57,45 +57,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             children: [
               const Spacer(flex: 2),
 
-              // App icon with glow
-              Container(
-                width: 120,
-                height: 120,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  gradient: RadialGradient(
-                    colors: [
-                      AppColors.gold.withOpacity(0.15),
-                      Colors.transparent,
-                    ],
-                  ),
-                  border: Border.all(
-                    color: AppColors.gold.withOpacity(0.3),
-                    width: 2,
-                  ),
-                  boxShadow: [
-                    BoxShadow(
-                      color: AppColors.gold.withOpacity(0.2),
-                      blurRadius: 40,
-                      spreadRadius: 10,
-                    ),
-                  ],
-                ),
-                child: ClipOval(
-                  child: Image.asset(
-                    'assets/icon.png',
-                    width: 120,
-                    height: 120,
-                    fit: BoxFit.cover,
-                  ),
-                ),
-              ).animate().fadeIn(duration: 500.ms).scale(
-                    begin: const Offset(0.8, 0.8),
-                    end: const Offset(1, 1),
-                    duration: 500.ms,
-                    curve: Curves.easeOutBack,
-                  ),
-
               const SizedBox(height: 32),
 
               // Welcome text
@@ -200,7 +161,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                         onChanged: (v) =>
                             setState(() => _hasAcceptedTerms = v ?? false),
                         text:
-                            'I have read and agree to Luxury Casino\'s Terms & Conditions and Privacy Policy.',
+                            'I have read and agree to Lucky Royale Slots\' Terms & Conditions and Privacy Policy.',
                       ),
                     ],
                   ),
@@ -270,7 +231,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                                 AppColors.slateGray.withOpacity(0.2),
                               ],
                             ),
-                      borderRadius: BorderRadius.circular(28),
+                      borderRadius: BorderRadius.circular(8),
                       boxShadow: _canContinue
                           ? [
                               BoxShadow(
